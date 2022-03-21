@@ -546,12 +546,13 @@ class WhoScored(BaseReader):
     ) -> "uc.Chrome":
         """Start the Selenium driver."""
         chrome_options = uc.ChromeOptions()
-        chrome_options.add_argument("--headless")
+        # chrome_options.add_argument("--headless")
         if path_to_browser is not None:
             chrome_options.add_argument("--binary-location=" + str(path_to_browser))
         if use_addblocker and path_to_addblocker is not None:
             chrome_options.add_argument("--load-extension=" + str(path_to_addblocker))
         if use_tor:
+            logger.info("Using tor!")
             proxy = "socks5://127.0.0.1:9050"
             resolver_rules = "MAP * ~NOTFOUND , EXCLUDE 127.0.0.1"
             chrome_options.add_argument("--proxy-server=" + proxy)
